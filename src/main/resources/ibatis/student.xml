@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.StudentMapper">
+     
+	 <resultMap id="studentMap" type="com.hust.hwt.homework.model.StudentModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="name" property="name" jdbcType="VARCHAR"/>
+	 	<result column="username" property="username" jdbcType="VARCHAR"/>
+	 	<result column="password" property="password" jdbcType="VARCHAR"/>
+	 	<result column="phone" property="phone" jdbcType="VARCHAR"/>
+	 	<result column="email" property="email" jdbcType="VARCHAR"/>
+	 	<result column="class_id" property="class_id" jdbcType="INTEGER"/>
+	 	<result column="school_id" property="school_id" jdbcType="INTEGER"/>
+	 	<result column="class_name" property="class_name" jdbcType="VARCHAR"/>
+	 	<result column="school_name" property="school_name" jdbcType="VARCHAR"/>
+	 	<association property="com.hust.hwt.homework.model.HomeworkStudentModel" javaType="com.hust.hwt.homework.model.HomeworkStudentModel">
+	 		<result column="status" property="status" jdbcType="INTEGER"/>
+	 		<result column="score" property="score" jdbcType="FLOAT"/>
+	 	</association>
+	</resultMap>
+	
+	<select id="getStudentsByClass" parameterType="com.hust.hwt.homework.model.StudentModel" resultMap="studentMap">
+		select 
+			a.id as id,
+			a.name as name,
+			a.username as username,
+			a.phone as phone,
+			a.email as email,
+			a.class_id as class_id,
+			a.school_id as school_id,
+			b.class_name as class_name
+		from
+			tbl_student a,tbl_class b
+		where
+			a.class_id = b.id 
+		and 
+			a.class_id = #{class_id}
+		order by 
+				a.id asc 
+			limit 
+				#{start},#{pageSize}
+	</select>
+	<select id="getStudentInfoById" parameterType="java.lang.Integer" resultMap="studentMap">
+			select 
+				a.id as id,
+				a.name as name,
+				a.username as username,
+				a.phone as phone,
+				a.email as email,
+				a.class_id as class_id,
+				a.school_id as school_id,
+				b.class_name as class_name,
+				c.schoolname as school_name
+			from
+				tbl_student a,tbl_class b,tbl_school c
+			where
+				a.class_id = b.id 
+			and 
+				a.school_id = c.id
+			and 
+				a.id = #{id}
+
+	</select>
+	<select id="getStudentsHomeWorkByClass" parameterType="java.lang.Integer" resultMap="studentMap">
+		select 
+			a.id as id,
+			a.name as name,
+			a.username as username,
+			a.phone as phone,
+			a.email as email,
+			a.class_id as class_id,
+			a.school_id as school_id,
+			(select b.status
+			 from tbl_homework_student b where b.student_id = a.id and b.homework_id = #{homework_id})
+			as status,
+			(select sum(score) from tbl_answer_student c where c.homework_id = #{homework_id} and c.student_id = a.id)
+			as score
+		from
+			tbl_student a 
+		where
+			a.class_id = #{class_id}
+		order by 
+			a.id asc 
+	</select>
+
+	<select id="totalStudentsByClass" parameterType="com.hust.hwt.homework.model.StudentModel" resultType="Integer">
+		select 
+			count(*)
+		from
+			tbl_student a,tbl_class b
+		where
+			a.class_id = b.id 
+		and 
+			a.class_id = #{class_id}
+	</select>
+	
+	<select id="studentLogin" parameterType="com.hust.hwt.homework.model.StudentModel" resultType="com.hust.hwt.homework.model.StudentModel">
+		select 
+			id,name,username,password,phone,email,class_id,school_id
+		from
+			tbl_student
+		where
+			username = #{username}
+		and
+			password = #{password}
+	</select>
+		<insert id="studentRegister" parameterType="com.hust.hwt.homework.model.StudentModel" useGeneratedKeys="true" keyProperty="id">
+			insert into tbl_student
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="name != null">
+					name,
+				</if>
+				<if test="username != null">
+					username,
+				</if>
+				<if test="password != null">
+					password,
+				</if>
+				<if test="phone != null">
+					phone,
+				</if>
+				<if test="email != null">
+					email,
+				</if>
+				<if test="class_id != null">
+					class_id,
+				</if>
+				<if test="school_id != null">
+					school_id,
+				</if>
+			</trim>
+			<trim prefix="values (" suffix=")" suffixOverrides=",">
+				<if test="name != null">
+					#{name},
+				</if>
+				<if test="username != null">
+					#{username},
+				</if>
+				<if test="password != null">
+					#{password},
+				</if>
+				<if test="phone != null">
+					#{phone},
+				</if>
+				<if test="email != null">
+					#{email},
+				</if>
+				<if test="class_id != null">
+					#{class_id},
+				</if>
+				<if test="school_id != null">
+					#{school_id},
+				</if>
+			</trim>
+		</insert>
+</mapper>

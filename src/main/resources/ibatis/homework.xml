@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.HomeworkMapper">
+     
+	 <resultMap id="homeworkMap" type="com.hust.hwt.homework.model.HomeworkModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="homework_name" property="homework_name" jdbcType="VARCHAR"/>
+	 	<result column="score" property="score" jdbcType="FLOAT"/>
+	 	
+	 	<result column="student_score" property="student_score" jdbcType="FLOAT"/>
+	 	<result column="teacher_id" property="teacher_id" jdbcType="INTEGER"/>
+	 	<result column="teacher_name" property="teacher_name" jdbcType="VARCHAR"/>
+	 	<result column="status" property="status" jdbcType="INTEGER"/>
+	 	<result column="choice_num" property="choice_num" jdbcType="INTEGER"/>
+	 	<result column="fb_num" property="fb_num" jdbcType="INTEGER"/>
+	 	<result column="saq_num" property="saq_num" jdbcType="INTEGER"/>
+	 	<result column="teacher_correct" property="teacher_correct" jdbcType="INTEGER"/>
+	 	<result column="deadline" property="deadline" jdbcType="TIMESTAMP"/>
+	 	<result column="updatetime" property="updatetime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<insert id="createHomework" parameterType="com.hust.hwt.homework.model.HomeworkModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_homework
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="homework_name != null">
+				homework_name,
+			</if>
+			<if test="teacher_id != null">
+				teacher_id,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="homework_name != null">
+				#{homework_name},
+			</if>
+			<if test="teacher_id != null">
+				#{teacher_id},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="score != null">
+				#{score},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="totalHomework" parameterType="com.hust.hwt.homework.model.HomeworkModel" resultType="Integer">
+		select 
+			count(*)
+		from 
+			tbl_homework
+		where 
+			teacher_id = #{teacher_id}
+	</select>
+	
+	<select id="getHomeworkInfoById" parameterType="java.lang.Integer" resultType="com.hust.hwt.homework.model.HomeworkModel">
+		select 
+			*
+		from 
+			tbl_homework
+		where 
+			id = #{id}
+	</select>
+	
+	<select id="getHomeworkInfo" resultMap="homeworkMap" parameterType="com.hust.hwt.homework.model.HomeworkModel">
+		select 
+			a.id as id,a.homework_name as homework_name,
+			(select COUNT(*) from tbl_homework_question where homework_id = a.id and question_type = 1) as choice_num,
+			(select COUNT(*) from tbl_homework_question where homework_id = a.id and question_type = 2) as fb_num,
+			(select COUNT(*) from tbl_homework_question where homework_id = a.id and question_type = 3) as saq_num,
+			a.score as score,
+			a.teacher_id as teacher_id,
+			a.status as status,
+			a.deadline as deadline,
+			a.teacher_correct as teacher_correct
+		from 
+			tbl_homework a
+		where 
+			a.teacher_id = #{teacher_id}
+		order by 
+				a.id desc 
+			limit 
+				#{start},#{pageSize}
+	</select>
+	
+	<update id="updateHomeworkInfo" parameterType="com.hust.hwt.homework.model.HomeworkModel">
+		update 
+			tbl_homework 
+		set
+			updatetime=#{updatetime}
+		 <if test="deadline!=null">,deadline = #{deadline}</if>  
+		 <if test="score!=null">,score = #{score}+score</if>  
+		 <if test="status!=null"> ,status = #{status} </if>  
+		 <if test="teacher_correct!=null"> ,teacher_correct = #{teacher_correct} </if>  
+		where 
+			id = #{id}
+	</update>
+	
+	<select id="getHomeworkInfoByClass" resultMap="homeworkMap" parameterType="java.lang.Integer">
+		select 
+			a.id as id,
+			a.homework_name as homework_name,
+			a.teacher_id as teacher_id,
+			a.score as score,
+			b.name as teacher_name,
+			a.deadline as deadline,
+			a.teacher_correct as teacher_correct,
+			(select d.status from tbl_homework_student d where d.student_id = #{student_id} and d.homework_id = a.id) as status,
+			(select d.score from tbl_homework_student d where d.student_id = #{student_id} and d.homework_id = a.id) as student_score
+		from 
+			tbl_homework a 
+		inner join 
+			tbl_teacher b 
+		on 
+			a.teacher_id =b.id
+		inner join 
+			tbl_homework_class c
+		on
+			a.id = c.homework_id 
+		where 
+			c.class_id = #{class_id}
+		order by 
+				a.id desc 
+	</select>
+</mapper>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.SAQQuestionMapper">
+     
+	 <resultMap id="saqQuestionMap" type="com.hust.hwt.homework.model.SAQQuestionModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="teacher_id" property="teacher_id" jdbcType="BIGINT"/>
+	 	<result column="question" property="question" jdbcType="VARCHAR"/>
+	 	<result column="key_word" property="key_word" jdbcType="VARCHAR"/>
+	 	<result column="score" property="score" jdbcType="FLOAT"/>
+	 	<result column="student_answer" property="student_answer" jdbcType="VARCHAR"/>
+	 	<result column="student_score" property="student_score" jdbcType="FLOAT"/>
+	 	<result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<!-- 添加简单题 -->
+	<insert id="addQuestion" parameterType="com.hust.hwt.homework.model.SAQQuestionModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_question_SAQ
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="teacher_id != null">
+				teacher_id,
+			</if>
+			<if test="question != null">
+				question,
+			</if>
+			<if test="key_word != null">
+				key_word,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="teacher_id != null">
+				#{teacher_id},
+			</if>
+			<if test="question != null">
+				#{question},
+			</if>
+			<if test="key_word != null">
+				#{key_word},
+			</if>
+			<if test="score != null">
+				#{score},
+			</if>
+			<if test="createtime != null">
+				#{createtime},
+			</if>
+		</trim>
+	</insert>
+	
+	<select id="getQuestionInfo" parameterType="com.hust.hwt.homework.model.SAQQuestionModel" resultMap="saqQuestionMap">
+		select 
+			a.id as id,
+			a.question as question,
+			a.key_word as key_word,
+			a.score as score,
+			a.createtime as createtime
+		from 
+			tbl_question_SAQ a
+		where 
+			a.teacher_id = #{teacher_id}
+			<if test="id!=null">
+			and 
+				a.id 
+			not in(
+				select 
+					b.saq_id 
+				from 
+					tbl_homework_question b 
+				where 
+					b.homework_id = #{id} 
+				and 
+					b.question_type=3
+			)
+			</if>
+		order by 
+				a.id asc 
+			limit 
+				#{start},#{pageSize}
+	</select>
+
+	<select id="totalQuestion" parameterType="com.hust.hwt.homework.model.SAQQuestionModel" resultType="Integer">
+		select 
+			count(*)
+		from 
+			tbl_question_SAQ a
+		where 
+			a.teacher_id = #{teacher_id}
+			<if test="id!=null">
+			and 
+				a.id 
+			not in(
+				select 
+					b.saq_id 
+				from 
+					tbl_homework_question b 
+				where 
+					b.homework_id = #{id} 
+				and 
+					b.question_type=3
+			)
+			</if>
+	</select>
+	
+	<select id="getSAQByHid" parameterType="java.lang.Integer" resultMap="saqQuestionMap">
+		select 
+			b.id as id,a.*
+		from 
+			tbl_question_SAQ a,tbl_homework_question b
+		where 
+			a.id = b.saq_id 
+		and 
+			b.question_type = 3
+		and 
+			b.homework_id = #{id}
+	</select>
+	
+	<select id="getSAQByHidAndSid" parameterType="java.lang.Integer" resultMap="saqQuestionMap">
+		select 
+			b.id as id,
+			a.question as question,
+			a.score as score,
+			a.key_word as key_word,
+			(select d.answer from tbl_answer_student d where d.question_id = b.id and d.student_id = #{sid}) as student_answer,
+			(select d.score from tbl_answer_student d where d.question_id = b.id and d.student_id = #{sid})as student_score
+		from 
+			tbl_question_SAQ a 
+		left join 
+			tbl_homework_question b
+		on
+			a.id = b.saq_id 
+		where 
+			b.homework_id = #{hid}
+	</select>
+	
+	<select id="getSAQById" parameterType="java.lang.Integer" resultMap="saqQuestionMap">
+		select 
+			a.*
+		from 
+			tbl_question_SAQ a,tbl_homework_question b
+		where 
+			a.id = b.saq_id 
+		and 
+			b.question_type = 3
+		and 
+			b.id = #{id}
+	</select>
+</mapper>

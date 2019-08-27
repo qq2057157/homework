@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.AnswserStudentMapper">
+     
+	 <resultMap id="anwserStudentMap" type="com.hust.hwt.homework.model.AnwserStudentModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="homework_id" property="homework_id" jdbcType="BIGINT"/>
+	 	<result column="student_id" property="student_id" jdbcType="BIGINT"/>
+	 	<result column="question_id" property="question_id" jdbcType="BIGINT"/>
+	 	<result column="question_type" property="question_type" jdbcType="INTEGER"/>
+	 	<result column="answer" property="answer" jdbcType="VARCHAR"/>
+	 	<result column="score" property="score" jdbcType="FLOAT"/>
+	 	<result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<select id="duplicateValidate" parameterType="com.hust.hwt.homework.model.AnwserStudentModel" resultType="java.lang.Integer">
+		select count(*) from tbl_answer_student where homework_id = #{homework_id} and student_id = #{student_id} and question_id = #{question_id};
+	</select>
+	
+	<select id="getSumScore" parameterType="com.hust.hwt.homework.model.AnwserStudentModel" resultType="java.lang.Float">
+		select sum(score) from tbl_answer_student where homework_id = #{homework_id} and student_id = #{student_id};
+	</select>
+
+	<insert id="addStudentAnwser" parameterType="com.hust.hwt.homework.model.AnwserStudentModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_answer_student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="homework_id != null">
+				homework_id,
+			</if>
+			<if test="student_id != null">
+				student_id,
+			</if>
+			<if test="question_id != null">
+				question_id,
+			</if>
+			<if test="question_type != null">
+				question_type,
+			</if>
+			<if test="answer != null">
+				answer,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="createtime != null">
+				createtime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">
+				#{id},
+			</if>
+			<if test="homework_id != null">
+				#{homework_id},
+			</if>
+			<if test="student_id != null">
+				#{student_id},
+			</if>
+			<if test="question_id != null">
+				#{question_id},
+			</if>
+			<if test="question_type != null">
+				#{question_type},
+			</if>
+			<if test="answer != null">
+				#{answer},
+			</if>
+			<if test="score != null">
+				#{score},
+			</if>
+			<if test="createtime != null">
+				#{createtime},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateStudentAnwser" parameterType="com.hust.hwt.homework.model.AnwserStudentModel">
+		update tbl_answer_student set  score = #{score} <if test="answer!=null">,answer = #{answer}</if> where student_id = #{student_id} and question_id = #{question_id} and  homework_id = #{homework_id} 
+	</update>
+</mapper>

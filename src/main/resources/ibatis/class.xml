@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.ClassMapper">
+     
+	 <resultMap id="classMap" type="com.hust.hwt.homework.model.ClassModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="class_name" property="class_name" jdbcType="VARCHAR"/>
+	 	<result column="class_password" property="class_password" jdbcType="VARCHAR"/>
+	 	<result column="school_id" property="school_id" jdbcType="INTEGER"/>
+	 	<result column="school_name" property="school_name" jdbcType="VARCHAR"/>
+	 	<result column="teacher_id" property="teacher_id" jdbcType="INTEGER"/>
+	</resultMap>
+	<!-- 添加班级 -->
+	<insert id="addClass" parameterType="com.hust.hwt.homework.model.ClassModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_class
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="class_name != null">
+				class_name,
+			</if>
+			<if test="class_password != null">
+				class_password,
+			</if>
+			<if test="school_id != null">
+				school_id,
+			</if>
+			<if test="teacher_id != null">
+				teacher_id,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="class_name != null">
+				#{class_name},
+			</if>
+			<if test="class_password != null">
+				#{class_password},
+			</if>
+			<if test="school_id != null">
+				#{school_id},
+			</if>
+			<if test="teacher_id != null">
+				#{teacher_id},
+			</if>
+		</trim>
+	</insert>
+
+	<select id="getClassInfoByPage" parameterType="com.hust.hwt.homework.model.ClassModel" resultMap="classMap">
+		select 
+			a.id as id,
+			a.class_name as class_name,
+			a.class_password as class_password,
+			a.school_id as school_id,
+			b.schoolname as school_name,
+			a.teacher_id as teacher_id
+		from 
+			tbl_class a ,tbl_school b
+		where 
+			a.school_id = b.id
+		and 
+			a.teacher_id = #{teacher_id}
+		order by 
+				a.id asc 
+			limit 
+				#{start},#{pageSize}
+	</select>
+
+	
+	<select id="totalClassInfo" parameterType="com.hust.hwt.homework.model.ClassModel" resultType="Integer">
+		select 
+			count(*)
+		from 
+			tbl_class a ,tbl_school b
+		where 
+			a.school_id = b.id
+		and 
+			teacher_id = #{teacher_id}
+	</select>
+
+	<select id="getClassInfo" parameterType="com.hust.hwt.homework.model.ClassModel" resultMap="classMap">
+		select 
+			a.id as id,
+			a.class_name as class_name,
+			a.class_password as class_password
+		from 
+			tbl_class a 
+		where 
+			<if test="school_id!=null">
+				a.school_id = #{school_id}
+			</if>
+			<if test="teacher_id!=null">
+				a.teacher_id = #{teacher_id}
+			</if>
+		order by 
+			a.id asc
+	</select>
+	
+	<select id="verifyPassword" parameterType="com.hust.hwt.homework.model.ClassModel" resultType="Integer">
+		select 
+			count(*)
+		from 
+			tbl_class
+		where 
+			id = #{id} and class_password = #{class_password}
+	</select>
+</mapper>

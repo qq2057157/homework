@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.HomeworkStudentMapper">
+     
+	 <resultMap id="homeworkStudentMap" type="com.hust.hwt.homework.model.HomeworkStudentModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="homework_id" property="homework_id" jdbcType="BIGINT"/>
+	 	<result column="student_id" property="student_id" jdbcType="BIGINT"/>
+	 	<result column="status" property="status" jdbcType="INTEGER"/>
+	 	<result column="score" property="score" jdbcType="INTEGER"/>
+	 	<result column="completedtime" property="completedtime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+
+	<select id="duplicateValidate" parameterType="com.hust.hwt.homework.model.HomeworkStudentModel" resultType="java.lang.Integer">
+		select count(*) from tbl_homework_student where homework_id = #{homework_id} and student_id = #{student_id};
+	</select>
+	
+	<insert id="addStudentHomework" parameterType="com.hust.hwt.homework.model.HomeworkStudentModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_homework_student
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="homework_id != null">
+				homework_id,
+			</if>
+			<if test="student_id != null">
+				student_id,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+			<if test="score != null">
+				score,
+			</if>
+			<if test="completedtime != null">
+				completedtime,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+		<if test="id != null">
+				#{id},
+			</if>
+			<if test="homework_id != null">
+				#{homework_id},
+			</if>
+			<if test="student_id != null">
+				#{student_id},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+			<if test="score != null">
+				#{score},
+			</if>
+			<if test="completedtime != null">
+				#{completedtime},
+			</if>
+		</trim>
+	</insert>
+	
+	<update id="updateStudentHomework" parameterType="com.hust.hwt.homework.model.HomeworkStudentModel">
+		update 
+			tbl_homework_student 
+		set 
+			status=#{status}
+			<if test="completedtime != null">,completedtime = #{completedtime} </if>
+			<if test="score != null">,score = #{score} </if>
+		where 
+			student_id = #{student_id} 
+		and  
+			homework_id = #{homework_id} 
+	</update>
+</mapper>

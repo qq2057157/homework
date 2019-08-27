@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hust.hwt.homework.mapper.ClassHomeworkMapper">
+     
+	 <resultMap id="classHomeworkMap" type="com.hust.hwt.homework.model.ClassHomeworkModel">
+	 	<result column="id" property="id" jdbcType="BIGINT"/>
+	 	<result column="homework_id" property="homework_id" jdbcType="BIGINT"/>
+	 	<result column="class_id" property="class_id" jdbcType="BIGINT"/>
+	 	<result column="class_name" property="class_name" jdbcType="VARCHAR"/>
+	 	<result column="teacher_id" property="teacher_id" jdbcType="BIGINT"/>
+	 	<result column="status" property="status" jdbcType="INTEGER"/>
+	 	<result column="deadline" property="deadline" jdbcType="TIMESTAMP"/>
+	 	<result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	<select id="duplicateDistributedHomework" parameterType="com.hust.hwt.homework.model.ClassHomeworkModel" resultType="java.lang.Integer">
+		select count(*) from tbl_homework_class where homework_id = #{homework_id} and class_id = #{class_id}
+	</select>
+	
+	<select id="getDistributedClassList" parameterType="com.hust.hwt.homework.model.ClassHomeworkModel" resultMap="classHomeworkMap">
+		select 
+			a.*,b.class_name as class_name 
+		from 
+			tbl_homework_class a ,tbl_class b 
+		where 
+			a.class_id = b.id 
+		and 
+			a.homework_id = #{homework_id}
+	</select>
+		<insert id="distributeHomework" parameterType="com.hust.hwt.homework.model.ClassHomeworkModel" useGeneratedKeys="true" keyProperty="id">
+		insert into tbl_homework_class
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="homework_id != null">
+				homework_id,
+			</if>
+			<if test="class_id != null">
+				class_id,
+			</if>
+			<if test="teacher_id != null">
+				teacher_id,
+			</if>
+			<if test="deadline != null">
+				deadline,
+			</if>
+			<if test="status != null">
+				status,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="homework_id != null">
+				#{homework_id},
+			</if>
+			<if test="class_id != null">
+				#{class_id},
+			</if>
+			<if test="teacher_id != null">
+				#{teacher_id},
+			</if>
+			<if test="deadline != null">
+				#{deadline},
+			</if>
+			<if test="status != null">
+				#{status},
+			</if>
+		</trim>
+	</insert>
+</mapper>
