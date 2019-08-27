@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 /** 
  * @Description:StudentMapper.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 上午11:03:29 
  * @version 1.0  
  */
@@ -18,7 +18,7 @@ public interface StudentMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午4:37:29
 	 * @param
 	 * @return
@@ -27,7 +27,7 @@ public interface StudentMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午4:37:32
 	 * @param
 	 * @return
@@ -36,7 +36,7 @@ public interface StudentMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午4:37:35
 	 * @param
 	 * @return
@@ -46,7 +46,7 @@ public interface StudentMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午4:41:00
 	 * @param
 	 * @return
@@ -55,7 +55,7 @@ public interface StudentMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午4:37:35
 	 * @param
 	 * @return

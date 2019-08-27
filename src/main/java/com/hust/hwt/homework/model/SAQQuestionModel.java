@@ -7,7 +7,7 @@ import lombok.Data;
 
 /** 
  * @Description:SAQQuestionModel.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月19日 下午2:28:33 
  * @version 1.0  
  */

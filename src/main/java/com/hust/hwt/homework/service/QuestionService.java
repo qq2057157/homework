@@ -23,7 +23,7 @@ import com.hust.hwt.homework.util.JSONCommon;
 
 /** 
  * @Description:ChoiceQuestionServiceImpl.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月18日 下午4:46:41 
  * @version 1.0  
  */

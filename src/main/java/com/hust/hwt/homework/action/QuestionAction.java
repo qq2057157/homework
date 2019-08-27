@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** 
  * @Description:QuestionChoiceAction.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月18日 下午5:08:48 
  * @version 1.0  
  */
@@ -32,7 +32,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:42:36
 	 * @param
 	 * @return
@@ -45,7 +45,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:42:47
 	 * @param
 	 * @return
@@ -58,7 +58,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:42:51
 	 * @param
 	 * @return
@@ -71,7 +71,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:42:56
 	 * @param
 	 * @return
@@ -84,7 +84,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:42:59
 	 * @param
 	 * @return
@@ -97,7 +97,7 @@ public class QuestionAction {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:43:03
 	 * @param
 	 * @return

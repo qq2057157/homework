@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSONObject;
 
 /** 
  * @Description:JSONCommon.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 下午2:52:39 
  * @version 1.0  
  */
@@ -24,7 +24,7 @@ public class JSONCommon {
 	/**
 	 * 
 	 * @Description:返回请求状态信息和数据
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月11日 下午4:00:53
 	 * @param
 	 * @return
@@ -44,7 +44,7 @@ public class JSONCommon {
 	/**
 	 * 
 	 * @Description:返回请求状态信息和数组
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月11日 下午3:59:29
 	 * @param
 	 * @return
@@ -65,7 +65,7 @@ public class JSONCommon {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月17日 上午10:49:20
 	 * @param
 	 * @return
@@ -86,7 +86,7 @@ public class JSONCommon {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月11日 下午3:06:51
 	 * @param
 	 * @return
@@ -104,7 +104,7 @@ public class JSONCommon {
 	/**
 	 * 
 	 * @Description:异步返回JSON消息方法
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月11日 下午3:04:08
 	 * @param
 	 * @return
@@ -133,7 +133,7 @@ public class JSONCommon {
 	 * 
 	 * @Description:根据传递的map集合封装json格式的数据并返回，如果map为空，则返回错误状态码500
 	 * 所有的json数据外面包含一层result标签
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月11日 下午3:05:28
 	 * @param
 	 * @return

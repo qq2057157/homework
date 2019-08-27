@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** 
  * @Description:LoginAction.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月10日 下午5:07:20 
  * @version 1.0  
  */
@@ -38,7 +38,7 @@ public class SchoolAction {
 	/**
 	 * 
 	 * @Description:分页取得班级信息
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午5:20:15
 	 * @param
 	 * @return
@@ -50,7 +50,7 @@ public class SchoolAction {
 	/**
 	 * 
 	 * @Description:根据学校id或者学校id取得班级信息
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午5:20:30
 	 * @param
 	 * @return
@@ -62,7 +62,7 @@ public class SchoolAction {
 	/**
 	 * 
 	 * @Description:根据班级id取得学生信息
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午5:20:57
 	 * @param
 	 * @return

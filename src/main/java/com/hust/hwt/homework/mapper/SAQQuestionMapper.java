@@ -6,19 +6,21 @@ import org.apache.ibatis.annotations.Param;
 
 import com.hust.hwt.homework.model.FillBlanksQuestionModel;
 import com.hust.hwt.homework.model.SAQQuestionModel;
+import org.springframework.stereotype.Component;
 
 /** 
  * @Description:SAQQuestionMapper.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月19日 下午2:33:19 
  * @version 1.0  
  */
+@Component
 public interface SAQQuestionMapper {
 
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:33:41
 	 * @param
 	 * @return
@@ -28,7 +30,7 @@ public interface SAQQuestionMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:33:49
 	 * @param
 	 * @return
@@ -38,7 +40,7 @@ public interface SAQQuestionMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 下午2:33:45
 	 * @param
 	 * @return

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /** 
  * @Description:SchoolMapper.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 下午2:38:26 
  * @version 1.0  
  */

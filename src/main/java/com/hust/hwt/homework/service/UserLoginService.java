@@ -26,7 +26,7 @@ import com.hust.hwt.homework.util.MD5;
 
 /** 
  * @Description:UserLoginServiceImpl.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 上午10:57:41 
  * @version 1.0  
  */

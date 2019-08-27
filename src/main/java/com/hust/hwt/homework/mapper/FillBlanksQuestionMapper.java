@@ -5,19 +5,21 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hust.hwt.homework.model.FillBlanksQuestionModel;
+import org.springframework.stereotype.Component;
 
 /** 
  * @Description:FillBlanksQuestionMapper.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月19日 上午10:20:02 
  * @version 1.0  
  */
+@Component
 public interface FillBlanksQuestionMapper {
 
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 上午10:20:30
 	 * @param
 	 * @return
@@ -27,7 +29,7 @@ public interface FillBlanksQuestionMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 上午10:20:33
 	 * @param
 	 * @return
@@ -37,7 +39,7 @@ public interface FillBlanksQuestionMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月19日 上午10:20:38
 	 * @param
 	 * @return
@@ -47,7 +49,7 @@ public interface FillBlanksQuestionMapper {
 	/**
 	 * 
 	 * @Description:TODO
-	 * @author: chengshiyang    
+	 * @author: huwentao    
 	 * @date:   2018年3月7日 下午3:45:32   
 	 * @version V1.0
 	 */

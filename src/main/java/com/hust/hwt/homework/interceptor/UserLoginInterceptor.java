@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 /** 
  * @Description:UserLoginInterceptor.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 上午10:34:01 
  * @version 1.0  
  */

@@ -5,13 +5,15 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.hust.hwt.homework.model.HomeworkModel;
+import org.springframework.stereotype.Component;
 
 /**
  * @Description:
- * @author:chengshiyang
+ * @author:huwentao
  * @date:2018年3月6日
  * @version 1.0  
  */
+@Component
 public interface HomeworkMapper {
 
 	public List<HomeworkModel> getHomeworkInfo(HomeworkModel homeworkModel);

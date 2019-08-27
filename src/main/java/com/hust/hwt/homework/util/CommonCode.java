@@ -5,7 +5,7 @@ import java.util.Map;
 
 /** 
  * @Description:CommonCode.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月11日 下午3:01:07 
  * @version 1.0  
  */

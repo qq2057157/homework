@@ -5,7 +5,7 @@ import lombok.Data;
 
 /** 
  * @Description:ClassModel.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月12日 上午11:00:46 
  * @version 1.0  
  */

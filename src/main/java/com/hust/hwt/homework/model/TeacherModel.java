@@ -4,7 +4,7 @@ import lombok.Data;
 
 /**
  * @Description:TeacherModel.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月10日 下午5:16:30 
  * @version 1.0  
  */

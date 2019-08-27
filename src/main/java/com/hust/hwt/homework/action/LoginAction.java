@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** 
  * @Description:LoginAction.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月10日 下午5:07:20 
  * @version 1.0  
  */
@@ -31,7 +31,7 @@ public class LoginAction {
 	/**
 	 * 
 	 * @Description:教师登录
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月12日 上午10:28:54
 	 * @param
 	 * @return
@@ -44,7 +44,7 @@ public class LoginAction {
 	/**
 	 * 
 	 * @Description:学生登录
-	 * @author  chengshiyang 
+	 * @author  huwentao 
 	 * @date 创建时间：2018年1月12日 上午10:28:58
 	 * @param
 	 * @return

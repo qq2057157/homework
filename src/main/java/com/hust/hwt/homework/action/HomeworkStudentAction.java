@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /** 
  * @Description:HomeworkAction.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月15日 上午10:06:10 
  * @version 1.0  
  */
@@ -30,10 +30,10 @@ public class HomeworkStudentAction {
 	@Autowired
 	private UserLoginService userLoginService;
 	
-	@RequestMapping("personal")
+	@RequestMapping("huwentao")
 	public String homeworkMain(HttpServletRequest request,HttpServletResponse response) {
 		
-		return "WEB-INF/student_personal";
+		return "WEB-INF/student_huwentao";
 	}
 	
 	@RequestMapping("complete")

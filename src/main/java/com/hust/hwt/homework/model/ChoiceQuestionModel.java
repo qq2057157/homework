@@ -7,7 +7,7 @@ import lombok.Data;
 
 /** 
  * @Description:ChoiceModel.java
- * @author  chengshiyang 
+ * @author  huwentao 
  * @date 创建时间：2018年1月18日 下午4:15:43 
  * @version 1.0  
  */
