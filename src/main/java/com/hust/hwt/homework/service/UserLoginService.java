@@ -4,10 +4,12 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.hust.hwt.homework.util.ResultCommon;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -102,8 +104,8 @@ public class UserLoginService{
 	}
 
 	
-	public void teacherLogin(HttpServletRequest request,
-			HttpServletResponse response, TeacherModel teacherModel) {
+	public Map<String,String> teacherLogin(HttpServletRequest request,
+										   HttpServletResponse response, TeacherModel teacherModel) {
 		TeacherModel loginResult;
 		try {
 			teacherModel.setPassword(MD5.GetMD5Code(teacherModel.getPassword()));
@@ -115,16 +117,19 @@ public class UserLoginService{
 
 				log.info("教师用户:"+loginResult.toString()+"登录成功，本次登录时间:"+LocalDateTime.now()+"上次登录时间是："+redisTemplate.opsForValue().get(loginResult.getUsername()+"_login_time"));
 				redisTemplate.opsForValue().set(loginResult.getUsername()+"_login_time", LocalDateTime.now().format(DateTimeFormatter.ISO_DATE_TIME));
-				JSONCommon.outputResultCodeJson(CommonCode.SUCCESS, response);
+				//JSONCommon.outputResultCodeJson(CommonCode.SUCCESS, response);
+				return ResultCommon.success();
 			} else {
-				log.info("教师用户:"+loginResult.getUsername()+"登录失败，登录时间:"+new Date());
-				JSONCommon.outputResultCodeJson(CommonCode.FAIL, response);
+				log.info("教师用户:"+teacherModel.getUsername()+"登录失败，登录时间:"+new Date());
+				//JSONCommon.outputResultCodeJson(CommonCode.FAIL, response);
 			}
 		} catch (Exception e) {
 			log.info("服务器发生故障，教师用户:"+teacherModel.getUsername()+"登录失败，登录时间:"+new Date());
-			JSONCommon.outputResultCodeJson(CommonCode.SERVER_ERROR, response);
+			//JSONCommon.outputResultCodeJson(CommonCode.SERVER_ERROR, response);
 			e.printStackTrace();
+			return ResultCommon.error();
 		}
+		return ResultCommon.fail();
 	}
 
 	

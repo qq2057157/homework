@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.hust.hwt.homework.model.ClassModel;
 import com.hust.hwt.homework.model.StudentModel;
 import com.hust.hwt.homework.model.TeacherModel;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Map;
 
 /** 
  * @Description:LoginAction.java
@@ -37,8 +40,9 @@ public class LoginAction {
 	 * @return
 	 */
 	@RequestMapping("login/teacher")
-	public void teacherLogin(HttpServletRequest request,HttpServletResponse response,TeacherModel teacherModel){
-		loginService.teacherLogin(request, response, teacherModel);
+	@ResponseBody
+	public Map<String,String> teacherLogin(HttpServletRequest request, HttpServletResponse response, TeacherModel teacherModel){
+		return loginService.teacherLogin(request, response, teacherModel);
 	}
 	
 	/**
