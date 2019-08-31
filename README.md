@@ -1,1 +1,2 @@
 # homework
+建表语句在resources/sql目录下，若要项目可运行请去掉application.properties中的redis配置和相关的类配置，并修改mysql连接为自己的
